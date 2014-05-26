@@ -3,12 +3,17 @@ package main
 import (
   "github.com/codegangsta/negroni"
   "github.com/gorilla/mux"
+  "github.com/hoisie/mustache"
   "net/http"
   "fmt"
 )
 
 func HomeHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(w, "Welcome to the home page!")
+	data := map[string]string { "Name": "World" }
+	html := mustache.RenderFileInLayout("app/views/index.html",
+													"app/views/base.html",
+													data)
+	fmt.Fprintf(w, html)
 }
 
 func main() {
