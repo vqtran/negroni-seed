@@ -1,18 +1,21 @@
 package views
 
 import (
-	"github.com/vqtran/tea"
+   "github.com/julienschmidt/httprouter"
+	"github.com/unrolled/render"
 	"net/http"
 )
 
-func Load() {
-	tea.SetEngine("amber")
-	tea.MustCompile("app/views/templates/", tea.Options{".amber", true})
-}
+var r *render.Render = render.New(render.Options{
+	Directory: "app/views/templates",
+	Layout: "layouts/layout",
+	Extensions: []string{".html"},
+	IsDevelopment: true,
+})
 
-func HomeHandler(w http.ResponseWriter, req *http.Request) {
+func HomeHandler(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	data := map[string]string { "Name": "World" }
-	tea.Render(w, "index", data)
+	r.HTML(w, http.StatusOK, "index", data)
 }
 
 

@@ -1,8 +1,0 @@
-extends layouts/layout
-
-block content
-   div[class="header-image"]
-      div[class="headline"]
-          div[class="container"]
-              h1 Hello #{Name}
-              h2 Go Will Knock Your Socks Off
